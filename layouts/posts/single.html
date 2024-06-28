@@ -2,6 +2,9 @@
 <h1>{{ .Title }}</h1>
 
 {{ .PublishDate.Format "Jan. 2, 2006" }}
+{{ $image := .Page.Resources.GetMatch .Params.Cover }} {{ with $image }}
+    <img src="{{ $image }}" alt="{{ .Title }}" class="img-post-cover">
+{{ end }}
 {{ with .Params.linkedin }}
     // <a href="{{ . }}">Linkedin</a>
 {{ end }}

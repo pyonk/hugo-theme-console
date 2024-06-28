@@ -8,9 +8,15 @@
     {{ if not .Params.private }}
         <div class="post">
             <p>
-                <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>    
+                <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
                 <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
-                {{ .Summary }}
+                {{ $image := .Page.Resources.GetMatch .Params.Cover }}
+                {{ with $image }}
+                    {{ $thumb := .Resize "400x" }}
+                    <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" class="img-post-cover">
+                {{end}}
+                <p>// {{ .Description }}</p>
+                <p>{{ .Summary }}</p>
             </p>
         </div>
     {{ end }}

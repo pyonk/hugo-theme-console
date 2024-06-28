@@ -2,9 +2,11 @@
 
 <h1>About</h1>
 
+{{ with .Site.GetPage "/about" }}
 <p>
-Console is a minimal, responsive and light theme for Hugo inspired by Linux console.  <a href="about/">(more)</a>
+{{ .Summary }}
 </p>
+{{ end }}
 <br/>
 
 <h1>Latest posts</h1>
@@ -16,9 +18,16 @@ Console is a minimal, responsive and light theme for Hugo inspired by Linux cons
             <p>
                 <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
                 <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
-                {{ .Summary }}
+                <div class="cover-and-description">
+                {{ $image := .Page.Resources.GetMatch .Params.Cover }}
+                {{ with $image }}
+                    {{ $thumb := .Resize "400x" }}
+                    <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" class="img-post-cover">
+                {{end}}
+                {{ .Description }}
+                </div>
             </p>
-        </div>    
+        </div>
     {{ end }}
 {{ end }}
 </div>

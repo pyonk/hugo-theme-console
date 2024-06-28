@@ -32,13 +32,30 @@
 
 :root {
     --global-font-size: 16px;
-    --global-font-color: #444;
     --mono-font-stack: Roboto Mono, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     --font-stack: Roboto Mono, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     --global-line-height: 1.6em;
     --page-width: 70em;
     --display-h1-decoration: 1;
-    --code-bg-color: #fff;
+}
+
+.dark-theme {
+    /*
+     * Ref. https://github.com/Gioni06/terminal.css/blob/master/templates/layouts/dark.html
+     */
+    --background-color: #222225;
+    --font-color: #e8e9ed;
+    --global-font-color: #e8e9ed;
+    --invert-font-color: #222225;
+    --secondary-color: #a3abba;
+    --tertiary-color: #a3abba;
+    --primary-color: #62c4ff;
+    --error-color: #ff3c74;
+    --progress-bar-background: #3f3f44;
+    --progress-bar-fill: #62c4ff;
+    --code-bg-color: #3f3f44;
+    --input-style: solid;
+    --display-h1-decoration: none;
 }
 
 @media only screen and (max-width: 850px) {
@@ -50,6 +67,23 @@
     }
 }
 
+.theme-toggle {
+    cursor: pointer;
+    margin-left: 1.6rem;
+    flex: 1 1 auto;
+    white-space: nowrap;
+    color: var(--secondary-color);
+}
+
+.theme-toggle > * {
+    opacity: 0.5;
+}
+
+body.light-theme .theme-toggle--light,
+body.dark-theme .theme-toggle--dark {
+    text-decoration: line-through;
+    opacity: 1;
+}
 
 .sidebar-heading {
     text-transform: none;
@@ -73,7 +107,6 @@
 body {
     font-family: var(--font-stack);
     font-size: var(--global-font-size);
-    background-color: #fff;
     margin-bottom: 75px;
 }
 
@@ -149,6 +182,11 @@ strong {
     font-weight: normal;
 }
 
+.terminal-menu {
+    display: flex;
+    align-items: center;
+}
+
 .terminal-menu li {
     margin-right: 30px;
 }
@@ -214,6 +252,11 @@ figure {
     padding-top: 0;
 }
 
+.posts-list  .img-post-cover {
+    width: 125px;
+    vertical-align: middle;
+}
+
 @media only screen and (max-width: 850px) {
     .site-name {
         width: 2ch;
@@ -225,6 +268,10 @@ figure {
         align-items: flex-start;
         flex-direction: column;
         display: flex;
+    }
+
+    .terminal-menu {
+        align-items: initial;
     }
 
     .terminal-menu ul {
